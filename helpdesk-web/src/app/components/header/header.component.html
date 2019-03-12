@@ -17,7 +17,7 @@
     </a>
     <!-- Navbar Right Menu -->
     <div class="navbar-custom-menu">
-      <p style="color: white"> admin@admin.com - ADMIN | <button>SAIR</button></p>
+      <p style="color: white"> {{ shared.user?.email }} - {{ shared.user?.profile | uppercase }} | <button class="btn btn-link" (click)="signOut()" style="color: white;">Sign out</button></p>
     </div>
   </nav>
 </header>

@@ -1,3 +1,4 @@
+import { AuthGuard } from './components/security/auth.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -11,8 +12,15 @@ import { LoginComponent } from './components/security/login/login.component';
 import { routes } from './app.routes';
 import { UserService } from './services/user.service';
 import { SharedService } from './services/shared.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AuthInterceptor } from './components/security/auth.interceptor';
+import { UserNewComponent } from './components/user-new/user-new.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { DialogService } from './dialog.service';
+import { TicketNewComponent } from './components/ticket-new/ticket-new.component';
+import { TicketService } from './services/ticket.service';
+import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +29,11 @@ import { FormsModule } from '@angular/forms';
     MenuComponent,
     FooterComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    UserNewComponent,
+    UserListComponent,
+    TicketNewComponent,
+    TicketListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +43,15 @@ import { FormsModule } from '@angular/forms';
   ],
   providers: [
     UserService,
-    SharedService
+    SharedService,
+    AuthGuard,
+    DialogService,
+    TicketService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

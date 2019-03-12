@@ -1,6 +1,8 @@
-<app-header *ngIf="showTemplate"></app-header>
-<app-menu *ngIf="showTemplate"></app-menu>
-<div [class.content-wrapper]="showTemplate">
+<!-- <app-header *ngIf="showTemplate"></app-header>
+<app-menu *ngIf="showTemplate"></app-menu> -->
+<app-header [hidden]="!showTemplate"></app-header>
+<app-menu [hidden]="!showTemplate"></app-menu>
+<div [ngClass]="showContentWrapper()">
   <section class="content-header">
 
   </section>
@@ -8,4 +10,6 @@
     <router-outlet></router-outlet>
   </section>
 </div>
-<app-footer *ngIf="showTemplate"></app-footer>
+<!-- <app-footer *ngIf="showTemplate"></app-footer> -->
+<app-footer [hidden]="!showTemplate"></app-footer>
+

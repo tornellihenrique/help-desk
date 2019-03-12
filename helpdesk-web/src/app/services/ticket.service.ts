@@ -11,11 +11,11 @@ export class TicketService {
 
   createOrUpdate(ticket: Ticket) {
     if (ticket.id != null && ticket.id != '') {
-      this.http.put(`${HELP_DESK_API}/api/ticket`, ticket);
+      return this.http.put(`${HELP_DESK_API}/api/ticket`, ticket);
     } else {
       ticket.id = null;
       ticket.status = 'New';
-      this.http.post(`${HELP_DESK_API}/api/ticket`, ticket);
+      return this.http.post(`${HELP_DESK_API}/api/ticket`, ticket);
     }
   }
 
@@ -33,11 +33,11 @@ export class TicketService {
 
   findByParams(page: number, count: number, assignedToMe: boolean, t: Ticket) {
     t.number = t.number == null ? 0 : t.number;
-    t.title = t.title == '' ? 'uninformed' : t.title;
-    t.status = t.status == '' ? 'uninformed' : t.status;
-    t.priority = t.priority == '' ? 'uninformed' : t.priority;
+    t.title = t.title == '' ? 'uniformed' : t.title;
+    t.status = t.status == '' ? 'uniformed' : t.status;
+    t.priority = t.priority == '' ? 'uniformed' : t.priority;
 
-    return this.http.get(`${HELP_DESK_API}/${page}/${count}/${t.number}/${t.title}/${t.status}/${t.priority}/${assignedToMe}`);
+    return this.http.get(`${HELP_DESK_API}/api/ticket/${page}/${count}/${t.number}/${t.title}/${t.status}/${t.priority}/${assignedToMe}`);
   }
 
   changeStatus(status: string, t: Ticket) {

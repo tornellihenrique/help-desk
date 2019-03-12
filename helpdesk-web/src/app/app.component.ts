@@ -8,6 +8,7 @@ import { SharedService } from './services/shared.service';
 })
 export class AppComponent {
 
+// tslint:disable-next-line: no-inferrable-types
   showTemplate: boolean = false;
   public shared: SharedService;
 
@@ -22,5 +23,11 @@ export class AppComponent {
     this.shared.showTemplate.subscribe(
       show => this.showTemplate = show
     );
+  }
+
+  showContentWrapper() {
+    return {
+      'content-wrapper': this.shared.isLoggedIn()
+    };
   }
 }
